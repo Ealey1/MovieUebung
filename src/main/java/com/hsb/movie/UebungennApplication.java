@@ -17,14 +17,6 @@ public class UebungennApplication {
 	}
 
 
-	@GetMapping(path = "/movies")
-	//es funktioniert so alles. kp was der default path ist und wie es ohne path funktioniert hätte
-	public List<Movie> movieList(){
-		return List.of(
-				new Movie(
-						"Prey"
-				)
-		);
 
-	};
-}
+
+	}
