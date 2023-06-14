@@ -1,21 +1,24 @@
 package com.hsb.movie.movies;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class MovieServices {
-    private static MovieRepository instance = new Movie();
-    private List<Movie> movies = new ArrayList<>();
+    private final MovieRepository movieRepository;
+
+    @Autowired
+    public MovieServices(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
     public List<Movie> getMovies(){
-        return movies;
+        return movieRepository.getAllMovies();
     }
 
     public void addNewMovie(Movie movie) {
-        movie.setId(Movie.getNumOfInstances()-2);
-        movie.setName(movie.getName());
-        getMovies().add(movie);
+        movieRepository.save(movie);
     }
 }

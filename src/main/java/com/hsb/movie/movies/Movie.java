@@ -1,6 +1,8 @@
 package com.hsb.movie.movies;
 
-public class Movie extends MovieRepository{
+import java.util.Objects;
+
+public class Movie {
 
     private String name;
 
@@ -35,4 +37,16 @@ public class Movie extends MovieRepository{
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+        final Movie other = (Movie) obj;
+
+        if ((!Objects.equals(this.id, other.id)) || (!Objects.equals(this.name, other.name)))
+            return false;
+
+        return true;
+    }
 }
