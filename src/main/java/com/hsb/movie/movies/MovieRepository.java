@@ -28,4 +28,14 @@ public class MovieRepository {
         }
         return null;
     }
+    public List<Movie> findByName(String name){
+        List<Movie> movies = new ArrayList<>();
+
+        for( Movie movie : movieList){
+            if(movie.getName().equalsIgnoreCase(name)){
+                movies.add(movie);
+            }
+        }
+        return movies;
+    }
 }
