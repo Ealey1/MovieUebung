@@ -1,9 +1,11 @@
 package com.hsb.movie.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,5 +21,15 @@ public class MovieController {
     @GetMapping
     public List<Movie> movieList(){
         return movieServices.getMovies();
+    }
+    @PostMapping
+    public ResponseEntity<Integer> addMovie(@RequestBody Movie movie) {
+        if (movie.getName() != null) {
+            movieServices.addNewMovie(movie);
+            return new ResponseEntity(movie.getId(),HttpStatus.CREATED);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }
